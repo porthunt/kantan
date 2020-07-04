@@ -1,0 +1,12 @@
+.kana {
+    font-size: 10em;
+    color: #2e3131;
+  }
+  
+.correct {
+    color: #3fc380;
+}
+
+.incorrect {
+    color: #d64541;
+}

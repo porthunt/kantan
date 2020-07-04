@@ -1,0 +1,28 @@
+input {
+    border: 0;
+    background-color: transparent;
+    font-size: 3em;
+    text-align: center;
+    color: transparent;
+    text-shadow: 0 0 0 #2e3131;
+  }
+  
+  input:focus{
+    outline: none;
+  }
+  
+  input::placeholder {
+    color: #2e3131;
+    opacity: .3;
+    font-style: italic;
+  }
+  
+  input:-ms-input-placeholder {
+    color: #2e3131;
+    opacity: .3;
+  }
+  
+  input::-ms-input-placeholder {
+    color: #2e3131;
+    opacity: .3;
+  }
