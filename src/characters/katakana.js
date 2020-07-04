@@ -117,9 +117,9 @@ const katakana = [
     {"key": "ギュ", "value": "gyu"},
     {"key": "ギョ", "value": "gyo"},
 
-    {"key": "ジャ", "value": "ja"},
-    {"key": "ジュ", "value": "ju"},
-    {"key": "ジョ", "value": "jo"},
+    {"key": "ジャ", "value": "jya"},
+    {"key": "ジュ", "value": "jyu"},
+    {"key": "ジョ", "value": "jyo"},
 
     {"key": "ビャ", "value": "bya"},
     {"key": "ビュ", "value": "byu"},

@@ -4,6 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import Kana from './Kana/Kana';
 import KanaInput from './KanaInput/KanaInput';
 import KanaSelector from './KanaSelector/KanaSelector';
+import StreakLabel from './StreakLabel/StreakLabel';
 import hiragana from './characters/hiragana';
 import katakana from './characters/katakana';
 import './App.css';
@@ -12,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const App = () => {
 
   const [validKanaState, setValidKanaState] = useState("");
+  const [streakState, setStreakState] = useState(0);
   const [inputValueState, setInputValueState] = useState("");
   const [selectedKanasState, setSelectedKanasState] = useState(["hiragana", "katakana"]);
   const [availableKanas, setAvailableKanas] = useState([...hiragana, ...katakana]);
@@ -36,11 +38,13 @@ const App = () => {
   const validateKana = (event) => {
     setInputValueState(event.target.value);
     if (kanaState["value"] === event.target.value) {
-      setValidKanaState("correct")
+      setValidKanaState("correct");
+      setStreakState(streakState + 1);
       refresh();
-    } else if (kanaState["value"] !== event.target.value && event.target.value.length >= kanaState["value"].length)
+    } else if (kanaState["value"] !== event.target.value && event.target.value.length >= kanaState["value"].length) {
+      setStreakState(0);
       setValidKanaState("incorrect");
-    else
+    } else
       setValidKanaState("");
   }
 
@@ -90,6 +94,7 @@ const App = () => {
           className={validKanaState} 
           value={inputValueState}
           change={validateKana} />
+        { streakState > 10 ? <StreakLabel streak={streakState}/> : null }
     </div>
   );
 }
