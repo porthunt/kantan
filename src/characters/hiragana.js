@@ -117,9 +117,9 @@ const hiragana = [
     {"key": "ぎゅ", "value": "gyu"},
     {"key": "ぎょ", "value": "gyo"},
 
-    {"key": "じゃ", "value": "ja"},
-    {"key": "じゅ", "value": "ju"},
-    {"key": "じょ", "value": "jo"},
+    {"key": "じゃ", "value": "jya"},
+    {"key": "じゅ", "value": "jyu"},
+    {"key": "じょ", "value": "jyo"},
 
     {"key": "びゃ", "value": "bya"},
     {"key": "びゅ", "value": "byu"},

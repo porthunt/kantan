@@ -1,12 +1,12 @@
 import React from 'react';
 import './KanaInput.css';
 
-const Kana = (props) => {
+const KanaInput = (props) => {
     return (
         <input 
         ref={props.reference}
         className={props.className}
-        placeholder="Start typing"
+        placeholder="What kana is this?"
         type="text"
         id="kana"
         name="kana"
@@ -15,5 +15,5 @@ const Kana = (props) => {
     );
 }
 
-export default Kana;
+export default KanaInput;
           

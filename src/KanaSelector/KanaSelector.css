@@ -1,0 +1,15 @@
+ul.menu > li {
+    display: inline;
+    margin: 10px;
+    cursor: pointer;
+    padding: 5px;
+    font-weight: 500;
+}
+
+ul.menu > li.selected {
+    border-bottom: 3px solid #d2527f;
+}
+
+ul.menu {
+    margin-top: 40px;
+}
