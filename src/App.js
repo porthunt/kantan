@@ -1,13 +1,17 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
+
 import Kana from './Kana/Kana';
 import KanaInput from './KanaInput/KanaInput';
 import KanaSelector from './KanaSelector/KanaSelector';
 import StreakLabel from './StreakLabel/StreakLabel';
-import Skip from './Skip/Skip';
+import Actions from './Actions/Actions';
+import Footer from './Footer/Footer';
+
 import hiragana from './characters/hiragana';
 import katakana from './characters/katakana';
+
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -16,6 +20,9 @@ const App = () => {
   const [validKanaState, setValidKanaState] = useState("");
   const [streakState, setStreakState] = useState(0);
   const [inputValueState, setInputValueState] = useState("");
+  const [inputIsDisabledState, setInputIsDisabledState] = useState(false);
+  const [isRevealedState, setIsRevealedState] = useState(false);
+  const [inputPlaceHolderState, setInputPlaceHolderState] = useState(null);
   const [selectedKanasState, setSelectedKanasState] = useState(["hiragana", "katakana"]);
   const [availableKanas, setAvailableKanas] = useState([...hiragana, ...katakana]);
   const [kanaState, setKanaState] = useState(() => {
@@ -34,6 +41,9 @@ const App = () => {
     setKanaState(availableKanas[rand]);
     setInputValueState("");
     setValidKanaState("");
+    setInputIsDisabledState(false);
+    setIsRevealedState(false);
+    setInputPlaceHolderState(null);
   }
 
   const validateKana = (event) => {
@@ -66,6 +76,16 @@ const App = () => {
     refresh();
   }
 
+  const revealKana = () => {
+    if (!isRevealedState) {
+      setStreakState(0);
+      setIsRevealedState(true);
+      setInputIsDisabledState(true);
+      setInputPlaceHolderState("Press skip");
+      setKanaState({"key": kanaState["values"].pop()});
+    }
+  }
+
   const untoggleKana = (kana) => {
     const currentKanas = [...selectedKanasState];
     let indexKana = currentKanas.indexOf(kana);
@@ -92,16 +112,21 @@ const App = () => {
 
   return (
     <div className="App">
-        <ToastContainer />
-        <KanaSelector selected={selectedKanasState} click={untoggleKana} />
-        <Kana kana={kanaState["key"]} validity={validKanaState} />
-        <Skip click={skipKana}/>
-        <KanaInput
-          reference={inputRef}
-          className={validKanaState} 
-          value={inputValueState}
-          change={validateKana} />
-        { streakState > 10 ? <StreakLabel streak={streakState}/> : null }
+        <div className="content">
+          <ToastContainer />
+          <KanaSelector selected={selectedKanasState} click={untoggleKana} />
+          <Kana kana={kanaState["key"]} validity={validKanaState} />
+          <Actions skipAction={skipKana} revealAction={revealKana} revealState={isRevealedState} />
+          <KanaInput
+            disabled={inputIsDisabledState}
+            reference={inputRef}
+            className={validKanaState} 
+            value={inputValueState}
+            placeholder={inputPlaceHolderState}
+            change={validateKana} />
+          { streakState > 10 ? <StreakLabel streak={streakState}/> : null }
+        </div>
+        <Footer />
     </div>
   );
 }

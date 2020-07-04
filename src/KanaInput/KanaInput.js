@@ -6,12 +6,13 @@ const KanaInput = (props) => {
         <input 
         ref={props.reference}
         className={props.className}
-        placeholder="What kana is this?"
+        placeholder={ props.placeholder ? props.placeholder: "What kana is this?" }
         type="text"
         id="kana"
         name="kana"
         value={props.value}
-        onChange={props.change} />
+        onChange={props.change}
+        disabled={props.disabled} />
     );
 }
 
