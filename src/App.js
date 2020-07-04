@@ -5,6 +5,7 @@ import Kana from './Kana/Kana';
 import KanaInput from './KanaInput/KanaInput';
 import KanaSelector from './KanaSelector/KanaSelector';
 import StreakLabel from './StreakLabel/StreakLabel';
+import Skip from './Skip/Skip';
 import hiragana from './characters/hiragana';
 import katakana from './characters/katakana';
 import './App.css';
@@ -60,6 +61,11 @@ const App = () => {
     refresh();
   }
 
+  const skipKana = () => {
+    setStreakState(0);
+    refresh();
+  }
+
   const untoggleKana = (kana) => {
     const currentKanas = [...selectedKanasState];
     let indexKana = currentKanas.indexOf(kana);
@@ -89,6 +95,7 @@ const App = () => {
         <ToastContainer />
         <KanaSelector selected={selectedKanasState} click={untoggleKana} />
         <Kana kana={kanaState["key"]} validity={validKanaState} />
+        <Skip click={skipKana}/>
         <KanaInput
           reference={inputRef}
           className={validKanaState} 
