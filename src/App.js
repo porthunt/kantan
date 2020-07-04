@@ -47,12 +47,13 @@ const App = () => {
   }
 
   const validateKana = (event) => {
-    setInputValueState(event.target.value);
-    if (kanaState["values"].includes(event.target.value)) {
+    const inputValue = event.target.value.toLowerCase();
+    setInputValueState(inputValue);
+    if (kanaState["values"].includes(inputValue)) {
       setValidKanaState("correct");
       setStreakState(streakState + 1);
       refresh();
-    } else if (!kanaState["values"].includes(event.target.value) && event.target.value.length >= 3) {
+    } else if (!kanaState["values"].includes(inputValue) && inputValue.length >= 3) {
       setStreakState(0);
       setValidKanaState("incorrect");
     } else
