@@ -4,6 +4,7 @@ input {
     padding-bottom: 20px;
     font-size: 3em;
     text-align: center;
+    background-color: transparent;
   }
   
   input:focus{
@@ -11,19 +12,19 @@ input {
   }
   
   input::placeholder {
-    color: #2e3131;
-    opacity: .1;
+    color: #d2527f;
+    opacity: .2;
     font-style: italic;
   }
   
   input:-ms-input-placeholder {
-    color: #2e3131;
-    opacity: .1;
+    color: #d2527f;
+    opacity: .2;
   }
   
   input::-ms-input-placeholder {
-    color: #2e3131;
-    opacity: .1;
+    color: #d2527f;
+    opacity: .2;
   }
 
   input:disabled {

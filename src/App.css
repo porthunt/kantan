@@ -1,7 +1,4 @@
-.App {
-  text-align: center;
-}
-
 .content {
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 130px);
+  text-align: center;
 }

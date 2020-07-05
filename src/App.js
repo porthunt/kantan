@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet';
 import { toast, ToastContainer } from 'react-toastify';
 
 import Kana from './Kana/Kana';
@@ -8,9 +9,12 @@ import KanaSelector from './KanaSelector/KanaSelector';
 import StreakLabel from './StreakLabel/StreakLabel';
 import Actions from './Actions/Actions';
 import Footer from './Footer/Footer';
+import Header from './Header/Header';
 
 import hiragana from './characters/hiragana';
 import katakana from './characters/katakana';
+import DARK_COLOR from './themes/dark';
+import LIGHT_COLOR from './themes/light';
 
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -24,6 +28,7 @@ const App = () => {
   const [isRevealedState, setIsRevealedState] = useState(false);
   const [inputPlaceHolderState, setInputPlaceHolderState] = useState(null);
   const [selectedKanasState, setSelectedKanasState] = useState(["hiragana", "katakana"]);
+  const [themeState, setThemeState] = useState("dark");
   const [availableKanas, setAvailableKanas] = useState([...hiragana, ...katakana]);
   const [kanaState, setKanaState] = useState(() => {
     let kanas = [...hiragana, ...katakana];
@@ -87,6 +92,13 @@ const App = () => {
     }
   }
 
+  const changeTheme = () => {
+    if (themeState === "light")
+      setThemeState("dark")
+    else if (themeState === "dark")
+      setThemeState("light")
+  }
+
   const untoggleKana = (kana) => {
     const currentKanas = [...selectedKanasState];
     let indexKana = currentKanas.indexOf(kana);
@@ -112,23 +124,30 @@ const App = () => {
 
 
   return (
+    <div className="application">
+    <Helmet>
+        <style>{'body { background-color: ' + (themeState === "light" ? DARK_COLOR : LIGHT_COLOR) + ' }'}</style>
+    </Helmet>
     <div className="App">
+        <Header click={changeTheme} theme={themeState} />
         <div className="content">
           <ToastContainer />
-          <KanaSelector selected={selectedKanasState} click={untoggleKana} />
-          <Kana kana={kanaState["key"]} validity={validKanaState} />
+          <KanaSelector theme={themeState} selected={selectedKanasState} click={untoggleKana} />
+          <Kana theme={themeState} kana={kanaState["key"]} validity={validKanaState} />
           <Actions skipAction={skipKana} revealAction={revealKana} revealState={isRevealedState} />
           <KanaInput
             disabled={inputIsDisabledState}
             reference={inputRef}
+            theme={themeState}
             className={validKanaState} 
             value={inputValueState}
             placeholder={inputPlaceHolderState}
             change={validateKana} />
-          { streakState > 10 ? <StreakLabel streak={streakState}/> : null }
+          { streakState > 10 ? <StreakLabel theme={themeState} streak={streakState}/> : null }
         </div>
-        <Footer />
+        <Footer theme={themeState} />
     </div>
+</div>
   );
 }
 

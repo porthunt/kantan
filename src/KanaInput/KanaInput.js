@@ -1,5 +1,7 @@
 import React from 'react';
 import './KanaInput.css';
+import DARK_COLOR from '../themes/dark';
+import LIGHT_COLOR from '../themes/light';
 
 const KanaInput = (props) => {
     return (
@@ -10,6 +12,7 @@ const KanaInput = (props) => {
         type="text"
         id="kana"
         name="kana"
+        style={props.theme === "light" ? {color: LIGHT_COLOR} : {color: DARK_COLOR}}
         value={props.value}
         onChange={props.change}
         disabled={props.disabled} />
