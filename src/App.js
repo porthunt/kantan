@@ -28,7 +28,7 @@ const App = () => {
   const [isRevealedState, setIsRevealedState] = useState(false);
   const [inputPlaceHolderState, setInputPlaceHolderState] = useState(null);
   const [selectedKanasState, setSelectedKanasState] = useState(["hiragana", "katakana"]);
-  const [themeState, setThemeState] = useState("dark");
+  const [themeState, setThemeState] = useState("light");
   const [availableKanas, setAvailableKanas] = useState([...hiragana, ...katakana]);
   const [kanaState, setKanaState] = useState(() => {
     let kanas = [...hiragana, ...katakana];
