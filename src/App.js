@@ -13,6 +13,7 @@ import Header from './Header/Header';
 
 import hiragana from './characters/hiragana';
 import katakana from './characters/katakana';
+import kanji from './characters/kanji';
 import DARK_COLOR from './themes/dark';
 import LIGHT_COLOR from './themes/light';
 
@@ -28,7 +29,10 @@ const App = () => {
   const [isRevealedState, setIsRevealedState] = useState(false);
   const [inputPlaceHolderState, setInputPlaceHolderState] = useState(null);
   const [selectedKanasState, setSelectedKanasState] = useState(["hiragana", "katakana"]);
-  const [themeState, setThemeState] = useState("light");
+  const [themeState, setThemeState] = useState(() => {
+    const local_theme = localStorage.getItem('theme');
+    return (local_theme ? local_theme : "light");
+  });
   const [availableKanas, setAvailableKanas] = useState([...hiragana, ...katakana]);
   const [kanaState, setKanaState] = useState(() => {
     let kanas = [...hiragana, ...katakana];
@@ -58,7 +62,7 @@ const App = () => {
       setValidKanaState("correct");
       setStreakState(streakState + 1);
       refresh();
-    } else if (!kanaState["values"].includes(inputValue) && inputValue.length >= 3) {
+    } else if (!kanaState["values"].includes(inputValue) && inputValue.length >= 2) {
       setStreakState(0);
       setValidKanaState("incorrect");
     } else
@@ -72,6 +76,9 @@ const App = () => {
     
     if (currentKanas.includes("katakana"))
       availableKanas = [...availableKanas, ...katakana];
+    
+    if (currentKanas.includes("kanji"))
+      availableKanas = [...availableKanas, ...kanji];
 
     setAvailableKanas(availableKanas);
     refresh();
@@ -93,10 +100,13 @@ const App = () => {
   }
 
   const changeTheme = () => {
-    if (themeState === "light")
-      setThemeState("dark")
-    else if (themeState === "dark")
-      setThemeState("light")
+    let theme;
+    if (themeState === "light") {
+      theme = "dark";
+    } else
+      theme = "light";
+    setThemeState(theme);
+    localStorage.setItem('theme', theme);
   }
 
   const untoggleKana = (kana) => {

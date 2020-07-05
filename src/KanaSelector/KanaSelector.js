@@ -18,6 +18,12 @@ const KanaSelector = (props) => {
                 className={props.selected.includes("hiragana") ? 'selected' : null}
                 >Hiragana
             </li>
+            <li 
+                onClick={() => props.click("kanji")}
+                style={props.theme === "light" ? {color: LIGHT_COLOR} : {color: DARK_COLOR}}
+                className={props.selected.includes("kanji") ? 'selected' : null}
+                >Kanji
+            </li>
         </ul>
     );
 }
