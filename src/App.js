@@ -55,18 +55,24 @@ const App = () => {
     setInputPlaceHolderState(null);
   }
 
-  const validateKana = (event) => {
+  const changeInput = (event) => {
     const inputValue = event.target.value.toLowerCase();
     setInputValueState(inputValue);
-    if (kanaState["values"].includes(inputValue)) {
-      setValidKanaState("correct");
+  }
+
+  const validateKana = (event) => {
+    event.preventDefault();
+    const isValid = kanaState["values"].some(function (value) {
+      return inputValueState === value;
+    });
+
+    if (isValid) {
       setStreakState(streakState + 1);
       refresh();
-    } else if (!kanaState["values"].includes(inputValue) && inputValue.length >= 2) {
-      setStreakState(0);
+    } else if (!isValid && inputValueState) {
       setValidKanaState("incorrect");
-    } else
-      setValidKanaState("");
+      setStreakState(0);
+    }
   }
 
   const modifyAvailableKanas = (currentKanas) => {
@@ -152,7 +158,8 @@ const App = () => {
             className={validKanaState} 
             value={inputValueState}
             placeholder={inputPlaceHolderState}
-            change={validateKana} />
+            change={changeInput}
+            submit={validateKana} />
           { streakState > 10 ? <StreakLabel theme={themeState} streak={streakState}/> : null }
         </div>
         <Footer theme={themeState} />

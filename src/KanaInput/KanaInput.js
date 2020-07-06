@@ -5,17 +5,19 @@ import LIGHT_COLOR from '../themes/light';
 
 const KanaInput = (props) => {
     return (
-        <input 
-        ref={props.reference}
-        className={props.className}
-        placeholder={ props.placeholder ? props.placeholder: "What kana is this?" }
-        type="text"
-        id="kana"
-        name="kana"
-        style={props.theme === "light" ? {color: LIGHT_COLOR} : {color: DARK_COLOR}}
-        value={props.value}
-        onChange={props.change}
-        disabled={props.disabled} />
+        <form onSubmit={props.submit} >
+            <input 
+            ref={props.reference}
+            className={props.className}
+            placeholder={ props.placeholder ? props.placeholder: "What kana is this?" }
+            type="text"
+            id="kana"
+            name="kana"
+            style={props.theme === "light" ? {color: LIGHT_COLOR} : {color: DARK_COLOR}}
+            value={props.value}
+            onChange={props.change}
+            disabled={props.disabled} />
+        </form>
     );
 }
 

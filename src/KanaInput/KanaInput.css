@@ -1,4 +1,4 @@
-input {
+input[type=text] {
     border: 0;
     border-bottom: 2px solid #d2527f;
     padding-bottom: 20px;
@@ -7,26 +7,38 @@ input {
     background-color: transparent;
   }
   
-  input:focus{
+  input[type=text]:focus {
     outline: none;
   }
   
-  input::placeholder {
+  input[type=text]::placeholder {
     color: #d2527f;
     opacity: .2;
     font-style: italic;
   }
   
-  input:-ms-input-placeholder {
+  input[type=text]:-ms-input-placeholder {
     color: #d2527f;
     opacity: .2;
   }
   
-  input::-ms-input-placeholder {
+  input[type=text]::-ms-input-placeholder {
     color: #d2527f;
     opacity: .2;
   }
 
-  input:disabled {
+  input[type=text]:disabled {
     background-color: transparent;
+  }
+
+  .submit {
+    display: block;
+    border: 2px solid #d2527f;
+    background-color: transparent;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    height: 40px;
+    width: 40px;
+    color: #d2527f;
   }

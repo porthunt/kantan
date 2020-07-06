@@ -1,11 +1,7 @@
 .kana {
     font-size: 10em;
   }
-  
-.correct {
-    color: #3fc380;
-}
 
 .incorrect {
-    color: #d64541;
+    color: #d64541 !important;
 }
