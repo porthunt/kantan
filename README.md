@@ -10,7 +10,7 @@ $ yarn start
 ```
 
 ## Upcoming Features
-Check the [Trello board](https://trello.com/b/3DGa9F2V/kantan) for the upcoming features.
+Check the [Project board](https://github.com/porthunt/kantan/projects/1) for the upcoming features.
 
 ## Collaborate
 Feel free to open an issue if you want a new feature, found a bug, etc. PR are more than welcome.
