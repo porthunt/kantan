@@ -28,14 +28,34 @@ const App = () => {
   const [inputIsDisabledState, setInputIsDisabledState] = useState(false);
   const [isRevealedState, setIsRevealedState] = useState(false);
   const [inputPlaceHolderState, setInputPlaceHolderState] = useState(null);
-  const [selectedKanasState, setSelectedKanasState] = useState(["hiragana", "katakana"]);
-  const [themeState, setThemeState] = useState(() => {
-    const local_theme = localStorage.getItem('theme');
-    return (local_theme ? local_theme : "light");
+  const [selectedKanasState, setSelectedKanasState] = useState(() => {
+    const kanaSelection = localStorage.getItem('kanaSelection');
+    return (kanaSelection ? kanaSelection : ["hiragana", "katakana"]);
   });
-  const [availableKanas, setAvailableKanas] = useState([...hiragana, ...katakana]);
+  const [themeState, setThemeState] = useState(() => {
+    const localTheme = localStorage.getItem('theme');
+    return (localTheme ? localTheme : "light");
+  });
+  const [availableKanas, setAvailableKanas] = useState(() => {
+    const kanaSelection = localStorage.getItem('kanaSelection');
+    if (!kanaSelection)
+      return [...hiragana, ...katakana]
+    
+    let available = []
+    if (kanaSelection.includes("hiragana"))
+      available = [...available, ...hiragana];
+    
+    if (kanaSelection.includes("katakana"))
+      available = [...available, ...katakana];
+
+    if (kanaSelection.includes("kanji"))
+      available = [...available, ...kanji];
+    
+    return available;
+    
+  });
   const [kanaState, setKanaState] = useState(() => {
-    let kanas = [...hiragana, ...katakana];
+    let kanas = availableKanas;
     const rand = Math.floor(1 + Math.random() * (kanas.length - 1));
     return kanas[rand];
   });
@@ -47,6 +67,7 @@ const App = () => {
 
   const refresh = () => {
     const rand = Math.floor(1 + Math.random() * (availableKanas.length - 1));
+    console.log("rand: " + rand + " key: " + availableKanas[rand]["key"])
     setKanaState(availableKanas[rand]);
     setInputValueState("");
     setValidKanaState("");
@@ -101,7 +122,7 @@ const App = () => {
       setIsRevealedState(true);
       setInputIsDisabledState(true);
       setInputPlaceHolderState("Press skip");
-      setKanaState({"key": kanaState["values"].pop()});
+      setKanaState({"key": kanaState["values"][0]});
     }
   }
 
@@ -132,6 +153,8 @@ const App = () => {
         currentKanas.splice(indexKana, 1);
       else
         currentKanas.push(kana);
+
+      localStorage.setItem('kanaSelection', currentKanas);
       setSelectedKanasState(currentKanas);
       modifyAvailableKanas(currentKanas);
     }
