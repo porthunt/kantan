@@ -12,7 +12,6 @@ const kanji = [
     {"key": "肉", "values": ["niku"]},
     {"key": "島", "values": ["shima"]},
     {"key": "一日", "values": ["ichinichi", "tsuitachi"]},
-    {"key": "困惑", "values": ["konwaku"]},
     {"key": "本当", "values": ["hontou"]},
     {"key": "天ぷら", "values": ["tenpura"]},
     {"key": "危ない", "values": ["abunai"]},
